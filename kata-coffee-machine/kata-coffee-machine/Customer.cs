@@ -82,7 +82,7 @@ namespace kata_coffee_machine
                 return $"M:{moneyToPay} Euros Remaining To Pay";
 
             string sugarCode, stickCode;
-            CheckSugar(order.sugar, out sugarCode,out stickCode);
+            CheckSugar(order.sugar, out sugarCode, out stickCode);
             return $"{order.drink}:{sugarCode}:{stickCode}";
         }
 
