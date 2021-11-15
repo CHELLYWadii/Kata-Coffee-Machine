@@ -6,7 +6,11 @@ namespace kata_coffee_machine
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Kata Coffee Machine Test!");
+
+            var newCustomer = new Customer("tea",1);
+
+            Console.WriteLine(newCustomer.GetOrder());
         }
     }
 }
