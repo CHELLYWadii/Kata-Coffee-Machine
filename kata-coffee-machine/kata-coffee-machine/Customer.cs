@@ -47,9 +47,10 @@ namespace kata_coffee_machine
             moneyInserted += money;
         }
 
-        private double RemainingToPay()
+        private double DeptToPay()
         {
-            return order.price - moneyInserted;
+            double dept = Math.Round((order.price - moneyInserted), 3);
+            return dept > 0 ? dept : 0;
         }
 
         private bool IsInvalidOrder()
@@ -63,25 +64,35 @@ namespace kata_coffee_machine
             return false;
         }
 
+        private void CheckSugar(int sugar, out string sugarCode, out string stickCode)
+        {
+            if (sugar == 0)
+            {
+                sugarCode = stickCode = "";
+            }
+            else
+            {
+                stickCode = "0";
+                sugarCode = sugar.ToString();
+            }
+        }
+
+        private string GetExtraHotCode(bool extraHot)
+        {
+            return extraHot ? "h" : "";
+        }
+
         public string MakeDrinks()
         {
-            double moneyToPay = RemainingToPay();
+            double moneyToPay = DeptToPay();
             if (IsInvalidOrder())
                 return "M:INVALID ORDER";
             if (moneyToPay > 0)
                 return $"M:{moneyToPay} Euros Remaining To Pay";
-            string sugar, stick, isExtraHot;
-            if (order.sugar == 0)
-            {
-                sugar = stick = "";
-            }
-            else
-            {
-                stick = "0";
-                sugar = order.sugar.ToString();
-            }
-            isExtraHot = order.isExtraHot ? "h" : "";
-            return $"{order.drink}{isExtraHot}:{sugar}:{stick}";
+            string sugarCode, stickCode, isExtraHotCode;
+            CheckSugar(order.sugar, out sugarCode, out stickCode);
+            isExtraHotCode = GetExtraHotCode(order.isExtraHot);
+            return $"{order.drink}{isExtraHotCode}:{sugarCode}:{stickCode}";
         }
     }
 }
