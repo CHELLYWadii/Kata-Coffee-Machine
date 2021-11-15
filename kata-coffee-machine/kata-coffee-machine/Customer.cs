@@ -53,7 +53,7 @@ namespace kata_coffee_machine
             return dept > 0 ? dept : 0;
         }
 
-        private bool IsInvalidOrder()
+        private bool HasInvalidOrder()
         {
             if (order.sugar > 2)
                 return true;
@@ -84,7 +84,7 @@ namespace kata_coffee_machine
 
         public string MakeDrinks()
         {
-            if (IsInvalidOrder())
+            if (HasInvalidOrder())
                 return "M:INVALID ORDER";
             double moneyToPay = DeptToPay();
             if (moneyToPay > 0)
