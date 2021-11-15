@@ -30,22 +30,27 @@ namespace kata_coffee_machine
             }
             order.sugar = sugar;
         }
+
+        private void CheckSugar(int sugar, out string sugarCode, out string stickCode)
+        {
+            if (sugar == 0)
+            {
+                sugarCode = stickCode = "";
+            }
+            else
+            {
+                stickCode = "0";
+                sugarCode = sugar.ToString();
+            }
+        }
+
         public string MakeDrinks()
         {
             if (order.sugar > 2 || order.drink == DrinkType.NONE)
                 return "M:INVALID ORDER";
-            string sugar;
-            string stick;
-            if (order.sugar == 0)
-            {
-                sugar = stick = "";
-            }
-            else
-            {
-                stick = "0";
-                sugar = order.sugar.ToString();
-            }
-            return $"{order.drink}:{sugar}:{stick}";
+            string sugarCode, stickCode;
+            CheckSugar(order.sugar, out sugarCode,out stickCode);
+            return $"{order.drink}:{sugarCode}:{stickCode}";
         }
     }
 }
