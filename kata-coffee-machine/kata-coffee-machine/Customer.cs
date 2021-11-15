@@ -90,6 +90,7 @@ namespace kata_coffee_machine
             double moneyToPay = DeptToPay();
             if (moneyToPay > 0)
                 return $"M:{moneyToPay} Euros Remaining To Pay";
+
             string sugarCode, stickCode, isExtraHotCode;
             CheckSugar(order.sugar, out sugarCode, out stickCode);
             isExtraHotCode = GetExtraHotCode(order.isExtraHot);
