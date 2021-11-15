@@ -13,22 +13,23 @@ namespace kata_coffee_machine
         public Customer(string drink, int sugar = 0)
         {
             order = new Order();
+            order.drink = GetDrinkType(drink);
+            order.sugar = sugar;
+        }
+
+        private DrinkType GetDrinkType(string drink)
+        {
             switch (drink.ToUpper())
             {
                 case "COFFEE":
-                    order.drink = DrinkType.C;
-                    break;
+                    return order.drink = DrinkType.C;
                 case "CHOCOLATE":
-                    order.drink = DrinkType.H;
-                    break;
+                    return order.drink = DrinkType.H;
                 case "TEA":
-                    order.drink = DrinkType.T;
-                    break;
+                    return order.drink = DrinkType.T;
                 default:
-                    order.drink = DrinkType.NONE;
-                    break;
+                    return order.drink = DrinkType.NONE;
             }
-            order.sugar = sugar;
         }
 
         private void CheckSugar(int sugar, out string sugarCode, out string stickCode)
