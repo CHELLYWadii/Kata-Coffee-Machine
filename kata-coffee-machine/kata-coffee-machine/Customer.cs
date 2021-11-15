@@ -10,7 +10,8 @@ namespace kata_coffee_machine
     public class Customer
     {
         private Order order { get; set; }
-        public Customer(string drink, int sugar = 0)
+        private double moneyInserted { get; set; }
+        public Customer(string drink, int sugar = 0, double money = 0)
         {
             order = new Order();
             switch (drink.ToUpper())
@@ -29,11 +30,30 @@ namespace kata_coffee_machine
                     break;
             }
             order.sugar = sugar;
+            InsertMoney(money);
+        }
+
+        public double GetOrderPrice()
+        {
+            return order.price;
+        }
+
+        public void InsertMoney(double money)
+        {
+            moneyInserted += money;
+        }
+
+        private double RemainingToPay()
+        {
+            return order.price - moneyInserted;
         }
         public string MakeDrinks()
         {
+            double moneyToPay = RemainingToPay();
             if (order.sugar > 2 || order.drink == DrinkType.NONE)
                 return "M:INVALID ORDER";
+            if (moneyToPay > 0)
+                return $"M:{moneyToPay} Euros Remaining To Pay";
             string sugar;
             string stick;
             if (order.sugar == 0)

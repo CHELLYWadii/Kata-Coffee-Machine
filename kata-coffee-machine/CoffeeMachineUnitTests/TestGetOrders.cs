@@ -23,12 +23,15 @@ namespace CoffeeMachineUnitTests
                     drinkType = "";
                     break;
             }
-            var customer = new Customer(drink);
+            var customer = new Customer(drink,0,1);
             Assert.AreEqual(customer.MakeDrinks(), $"{drinkType}::");
-            customer = new Customer(drink, 1);
+            customer = new Customer(drink, 1,1);
             Assert.AreEqual(customer.MakeDrinks(), $"{drinkType}:1:0");
-            customer = new Customer(drink, 3);
+            customer = new Customer(drink, 3,1);
             Assert.AreEqual(customer.MakeDrinks(), "M:INVALID ORDER");
+            customer = new Customer(drink, 0);
+            var remainingToPay = -1 * customer.GetOrderPrice();
+            Assert.AreNotEqual(customer.MakeDrinks(), $"M:{remainingToPay} Euros Remaining To Pay");
         }
 
         [Test]
