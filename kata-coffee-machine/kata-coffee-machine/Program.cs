@@ -10,7 +10,7 @@ namespace kata_coffee_machine
 
             var newCustomer = new Customer("tea",1);
 
-            Console.WriteLine(newCustomer.GetOrder());
+            Console.WriteLine(newCustomer.MakeDrinks());
         }
     }
 }

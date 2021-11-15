@@ -24,11 +24,11 @@ namespace CoffeeMachineUnitTests
                     break;
             }
             var customer = new Customer(drink);
-            Assert.AreEqual(customer.GetOrder(), $"{drinkType}::");
+            Assert.AreEqual(customer.MakeDrinks(), $"{drinkType}::");
             customer = new Customer(drink, 1);
-            Assert.AreEqual(customer.GetOrder(), $"{drinkType}:1:0");
+            Assert.AreEqual(customer.MakeDrinks(), $"{drinkType}:1:0");
             customer = new Customer(drink, 3);
-            Assert.AreEqual(customer.GetOrder(), "M:INVALID ORDER");
+            Assert.AreEqual(customer.MakeDrinks(), "M:INVALID ORDER");
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace CoffeeMachineUnitTests
         public void TestInvalidOrder()
         {
             var customer = new Customer("Non Valid Drink");
-            Assert.AreEqual(customer.GetOrder(), "M:INVALID ORDER");
+            Assert.AreEqual(customer.MakeDrinks(), "M:INVALID ORDER");
         }
 
     }
