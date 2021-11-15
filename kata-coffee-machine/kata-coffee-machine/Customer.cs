@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace kata_coffee_machine
@@ -82,7 +83,7 @@ namespace kata_coffee_machine
             return extraHot ? "h" : "";
         }
 
-        public string MakeDrinks()
+        public string GetOrderCommand()
         {
             if (HasInvalidOrder())
                 return "M:INVALID ORDER";
@@ -93,6 +94,11 @@ namespace kata_coffee_machine
             CheckSugar(order.sugar, out sugarCode, out stickCode);
             isExtraHotCode = GetExtraHotCode(order.isExtraHot);
             return $"{order.drink}{isExtraHotCode}:{sugarCode}:{stickCode}";
+        }
+
+        public void SendCoffeeMakerCommand()
+        {
+            Console.WriteLine(GetOrderCommand());
         }
     }
 }
