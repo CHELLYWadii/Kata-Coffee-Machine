@@ -11,16 +11,11 @@ namespace kata_coffee_machine
     public class Customer
     {
         private Order order { get; set; }
-        public Customer(string drink, int sugar)
+        public Customer(string drink, int sugar = 0)
         {
             order = new Order();
             order.drink = GetDrinkType(drink);
             order.sugar = sugar;
-        }
-
-        public Customer(string drink) : this(drink, 0)
-        {
-
         }
 
         private DrinkType GetDrinkType(string drink)
