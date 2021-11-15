@@ -14,27 +14,27 @@ namespace kata_coffee_machine
         public Customer(string drink, int sugar = 0, double money = 0, bool isExtraHot = false)
         {
             order = new Order();
-            switch (drink.ToUpper())
-            {
-                case "COFFEE":
-                    order.drink = DrinkType.C;
-                    break;
-                case "CHOCOLATE":
-                    order.drink = DrinkType.H;
-                    break;
-                case "TEA":
-                    order.drink = DrinkType.T;
-                    break;
-                case "OJ":
-                    order.drink = DrinkType.O;
-                    break;
-                default:
-                    order.drink = DrinkType.NONE;
-                    break;
-            }
+            order.drink = GetDrinkType(drink);
             order.sugar = sugar;
             order.isExtraHot = isExtraHot;
             InsertMoney(money);
+        }
+
+        private DrinkType GetDrinkType(string drink)
+        {
+            switch (drink.ToUpper())
+            {
+                case "COFFEE":
+                    return order.drink = DrinkType.C;
+                case "CHOCOLATE":
+                    return order.drink = DrinkType.H;
+                case "TEA":
+                    return order.drink = DrinkType.T;
+                case "OJ":
+                    return order.drink = DrinkType.O;
+                default:
+                    return order.drink = DrinkType.NONE;
+            }
         }
 
         public double GetOrderPrice()
@@ -84,9 +84,9 @@ namespace kata_coffee_machine
 
         public string MakeDrinks()
         {
-            double moneyToPay = DeptToPay();
             if (IsInvalidOrder())
                 return "M:INVALID ORDER";
+            double moneyToPay = DeptToPay();
             if (moneyToPay > 0)
                 return $"M:{moneyToPay} Euros Remaining To Pay";
             string sugarCode, stickCode, isExtraHotCode;
