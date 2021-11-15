@@ -11,11 +11,16 @@ namespace kata_coffee_machine
     public class Customer
     {
         private Order order { get; set; }
-        public Customer(string drink, int sugar = 0)
+        public Customer(string drink, int sugar)
         {
             order = new Order();
             order.drink = GetDrinkType(drink);
             order.sugar = sugar;
+        }
+
+        public Customer(string drink) : this(drink, 0)
+        {
+
         }
 
         private DrinkType GetDrinkType(string drink)
@@ -60,7 +65,7 @@ namespace kata_coffee_machine
             if (HasInvalidOrder())
                 return "M:INVALID ORDER";
             string sugarCode, stickCode;
-            CheckSugar(order.sugar, out sugarCode,out stickCode);
+            CheckSugar(order.sugar, out sugarCode, out stickCode);
             return $"{order.drink}:{sugarCode}:{stickCode}";
         }
 
