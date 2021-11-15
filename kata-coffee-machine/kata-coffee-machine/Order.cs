@@ -11,6 +11,7 @@ namespace kata_coffee_machine
     {
         public DrinkType drink { get; set; }
         public int sugar { get; set; }
+        public bool isExtraHot { get; set; }
         public double price
         {
             get

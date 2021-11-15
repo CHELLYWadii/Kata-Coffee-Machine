@@ -12,6 +12,7 @@ namespace kata_coffee_machine
         C,
         T,
         H,
+        O,
         NONE
     }
 }

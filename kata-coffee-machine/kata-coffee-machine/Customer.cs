@@ -11,7 +11,7 @@ namespace kata_coffee_machine
     {
         private Order order { get; set; }
         private double moneyInserted { get; set; }
-        public Customer(string drink, int sugar = 0, double money = 0)
+        public Customer(string drink, int sugar = 0, double money = 0, bool isExtraHot = false)
         {
             order = new Order();
             switch (drink.ToUpper())
@@ -25,11 +25,15 @@ namespace kata_coffee_machine
                 case "TEA":
                     order.drink = DrinkType.T;
                     break;
+                case "OJ":
+                    order.drink = DrinkType.O;
+                    break;
                 default:
                     order.drink = DrinkType.NONE;
                     break;
             }
             order.sugar = sugar;
+            order.isExtraHot = isExtraHot;
             InsertMoney(money);
         }
 
@@ -47,15 +51,26 @@ namespace kata_coffee_machine
         {
             return order.price - moneyInserted;
         }
+
+        private bool IsInvalidOrder()
+        {
+            if (order.sugar > 2)
+                return true;
+            if (order.drink == DrinkType.NONE)
+                return true;
+            if (order.drink == DrinkType.O && order.isExtraHot)
+                return true;
+            return false;
+        }
+
         public string MakeDrinks()
         {
             double moneyToPay = RemainingToPay();
-            if (order.sugar > 2 || order.drink == DrinkType.NONE)
+            if (IsInvalidOrder())
                 return "M:INVALID ORDER";
             if (moneyToPay > 0)
                 return $"M:{moneyToPay} Euros Remaining To Pay";
-            string sugar;
-            string stick;
+            string sugar, stick, isExtraHot;
             if (order.sugar == 0)
             {
                 sugar = stick = "";
@@ -65,7 +80,8 @@ namespace kata_coffee_machine
                 stick = "0";
                 sugar = order.sugar.ToString();
             }
-            return $"{order.drink}:{sugar}:{stick}";
+            isExtraHot = order.isExtraHot ? "h" : "";
+            return $"{order.drink}{isExtraHot}:{sugar}:{stick}";
         }
     }
 }
