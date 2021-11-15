@@ -8,7 +8,7 @@ namespace kata_coffee_machine
         {
             Console.WriteLine("Kata Coffee Machine Test!");
 
-            var newCustomer = new Customer("tea",1);
+            var newCustomer = new Customer("tea",0,0.2);
 
             Console.WriteLine(newCustomer.MakeDrinks());
         }

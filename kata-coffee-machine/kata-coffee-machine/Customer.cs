@@ -43,29 +43,36 @@ namespace kata_coffee_machine
             moneyInserted += money;
         }
 
-        private double RemainingToPay()
+        private double DeptToPay()
         {
-            return order.price - moneyInserted;
+            double dept = Math.Round((order.price - moneyInserted), 3);
+            return dept > 0 ? dept : 0;
         }
+
+        private void CheckSugar(int sugar, out string sugarCode, out string stickCode)
+        {
+            if (sugar == 0)
+            {
+                sugarCode = stickCode = "";
+            }
+            else
+            {
+                stickCode = "0";
+                sugarCode = sugar.ToString();
+            }
+        }
+
         public string MakeDrinks()
         {
-            double moneyToPay = RemainingToPay();
+            double moneyToPay = DeptToPay();
             if (order.sugar > 2 || order.drink == DrinkType.NONE)
                 return "M:INVALID ORDER";
             if (moneyToPay > 0)
                 return $"M:{moneyToPay} Euros Remaining To Pay";
-            string sugar;
-            string stick;
-            if (order.sugar == 0)
-            {
-                sugar = stick = "";
-            }
-            else
-            {
-                stick = "0";
-                sugar = order.sugar.ToString();
-            }
-            return $"{order.drink}:{sugar}:{stick}";
+
+            string sugarCode, stickCode;
+            CheckSugar(order.sugar, out sugarCode,out stickCode);
+            return $"{order.drink}:{sugarCode}:{stickCode}";
         }
     }
 }
