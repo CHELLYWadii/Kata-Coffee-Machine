@@ -45,9 +45,18 @@ namespace kata_coffee_machine
             }
         }
 
+        private bool HasInvalidOrder()
+        {
+            if (order.sugar > 2)
+                return true;
+            if (order.drink == DrinkType.NONE)
+                return true;
+            return false;
+        }
+
         public string MakeDrinks()
         {
-            if (order.sugar > 2 || order.drink == DrinkType.NONE)
+            if (HasInvalidOrder())
                 return "M:INVALID ORDER";
             string sugarCode, stickCode;
             CheckSugar(order.sugar, out sugarCode,out stickCode);
